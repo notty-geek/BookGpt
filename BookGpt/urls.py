@@ -17,13 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from services.chatbot.views import ChatHandlerView
+from services.chatbot.views import ChatHandlerView, ChatPromptView
 from services.pdfparser.views import ParsePDFView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('parser/pdf', ParsePDFView.as_view(), name='parse_pdf'),
     path('chat/', ChatHandlerView.as_view(), name='get_response'),
+    path('prompts/', ChatPromptView.as_view(), name='chat_prompt_list'),
     path('django-rq/', include('django_rq.urls')),
 
 ]

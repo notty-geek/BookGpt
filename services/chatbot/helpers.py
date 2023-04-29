@@ -11,6 +11,10 @@ class ChatHelper:
         save_prompt_job.delay(prompt)
         return response
 
+    @staticmethod
+    def get_prompts():
+        return list(ChatPrompt.objects.values_list("prompt", flat=True).order_by('-created_at'))
+
 
 @job
 @transaction.atomic
