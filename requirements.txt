@@ -16,3 +16,4 @@ unstructured==0.6.2
 unstructured-inference==0.4.2
 flake8==6.0.0
 pre-commit==3.2.2
+python-dotenv==1.0.0
