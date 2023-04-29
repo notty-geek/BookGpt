@@ -5,6 +5,75 @@ import os
 from unittest import TestCase, mock
 from utils.lang_chain import LangChainConnector
 
+from django.test import TestCase
+from rest_framework.test import APIClient
+from rest_framework import status
+from unittest.mock import patch
+
+from services.pdfparser.task import parse_pdf_task
+
+
+class ParsePDFViewTestCase(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+
+    def test_parse_pdf_view(self):
+        # Construct a mock request object with data containing PDF URLs.
+        data = {'urls': ['http://example.com/pdf1', 'http://example.com/pdf2']}
+        response = self.client.post('/v1/parse-pdf/', data)
+
+        # Assert that the response status code is 202.
+        self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
+
+        # Assert that the response body contains a 'message' key with a non-empty value.
+        self.assertIn('message', response.data)
+        self.assertNotEqual(response.data['message'], '')
+
+    def test_invalid_parse_pdf_view(self):
+        # Construct a mock request object with invalid data.
+        data = {'invalid_field': 'http://example.com/pdf'}
+        response = self.client.post('/v1/parse-pdf/', data)
+
+        # Assert that the response status code is 400.
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_empty_pdf_urls(self):
+        # Construct a mock request object with an empty list of PDF URLs.
+        data = {'urls': []}
+        response = self.client.post('/v1/parse-pdf/', data)
+
+        # Assert that the response status code is 400.
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+        # Assert that the response body contains a 'urls' key with an error message.
+        self.assertIn('urls', response.data)
+        self.assertEqual(response.data['urls'][0], 'This list may not be empty.')
+
+    @patch('services.pdfparser.views.enqueue')
+    def test_parse_pdf_task_enqueueing(self, mock_enqueue):
+        # Construct a mock request object with data containing PDF URLs.
+        data = {'urls': ['http://example.com/pdf']}
+        response = self.client.post('/v1/parse-pdf/', data)
+
+        # Assert that the response status code is 202.
+        self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
+
+        # Assert that the parse_pdf_task function was called with the PDF URLs list.
+        mock_enqueue.assert_called_once_with(parse_pdf_task, ['http://example.com/pdf'])
+
+    @patch('services.pdfparser.views.enqueue', side_effect=Exception('test error'))
+    def test_parse_pdf_view_error(self, mock_enqueue):
+        # Construct a mock request object with data containing PDF URLs.
+        data = {'urls': ['http://example.com/pdf']}
+        response = self.client.post('/v1/parse-pdf/', data)
+
+        # Assert that the response status code is 500.
+        self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        # Assert that the response body contains an 'error' key with a non-empty value.
+        self.assertIn('error', response.data)
+        self.assertNotEqual(response.data['error'], '')
+
 
 class TestLangChainConnector(TestCase):
 
