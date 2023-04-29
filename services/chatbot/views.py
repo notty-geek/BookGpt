@@ -18,3 +18,15 @@ class ChatHandlerView(APIView):
             error_message = 'Something went wrong'
             logging.error(f'Error in ChatHandlerView: {e}')
             return Response({'error': error_message}, status=500)
+
+
+
+class ChatPromptView(APIView):
+
+    def get(self, request):
+        try:
+            prompts = ChatHelper.get_prompts()
+            return Response(prompts, status=200)
+        except Exception as e:
+            error_message = str(e)
+            return Response({'error': error_message}, status=500)
