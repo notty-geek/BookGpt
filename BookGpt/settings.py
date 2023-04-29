@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'services.pdfparser',
     'django_rq',
+    'services.chatbot'
 ]
 
 MIDDLEWARE = [
