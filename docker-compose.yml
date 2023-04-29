@@ -11,8 +11,8 @@ services:
 
   backend:
     container_name: backend
-    build: .
-#    image: docker.io/sahil7776/api
+#    build: .
+    image: docker.io/sahil7776/api
     command: make local-api
     volumes:
       - .:/code
@@ -31,8 +31,8 @@ services:
 
   rqworker:
     container_name: rqworker
-    build: .
-#    image: docker.io/sahil7776/api
+#    build: .
+    image: docker.io/sahil7776/api
     command: python manage.py rqworker
     volumes:
       - .:/code
