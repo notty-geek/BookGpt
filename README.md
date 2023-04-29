@@ -40,7 +40,7 @@ PINECONE_API_KEY=
 
 ```
 
-2. Run `make wake-up`
+2. Now its Time to Wake up our BookGpt So  Run `make wake-up`
 
 #### Your local server should spin up and Swagger Url should be up and running
 
