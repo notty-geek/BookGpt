@@ -11,7 +11,8 @@ services:
 
   backend:
     container_name: backend
-    build: .
+#    build: .
+    image: zoundio.azurecr.io/localdev:py310
     command: make local-api
     volumes:
       - .:/code
@@ -30,7 +31,8 @@ services:
 
   rqworker:
     container_name: rqworker
-    build: .
+#    build: .
+    image: zoundio.azurecr.io/localdev:py310
     command: python manage.py rqworker
     volumes:
       - .:/code

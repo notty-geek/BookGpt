@@ -1,4 +1,4 @@
-DOCKER_REPO := sahil7776
+DOCKER_REPO := docker.io/sahil7776
 
 wake-up:
 	docker-compose up -d
@@ -13,7 +13,7 @@ build-image:
 	@docker build -t ${DOCKER_REPO}/api -f Dockerfile .
 
 push-image:
-	@docker push  -t ${DOCKER_REPO}/api
+	@docker push  ${DOCKER_REPO}/api
 
 run-test:
 	python manage.py test services.chatbot.tests services.pdfparser.tests
