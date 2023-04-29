@@ -12,7 +12,7 @@ class ChatHandlerView(APIView):
         sanitized_prompt = serializer.validated_data['prompt'].strip().replace('\n', ' ')
         try:
             response = ChatHelper().get_response(sanitized_prompt)
-            return Response(response, status=200)
+            return Response({"response":response}, status=200)
 
         except Exception as e:
             error_message = 'Something went wrong'

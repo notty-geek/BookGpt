@@ -9,11 +9,11 @@ servers:
 tags:
   - name: Parser
     description: |
-        # Parsing Related Json API's
+      # Parsing Related Json API's
 
   - name: Chat
     description: |
-        # Parsing Related Json API's
+      # Parsing Related Json API's
   - name: Prompt
     description: |
       # Prompt Related Json API's
@@ -38,6 +38,10 @@ paths:
                   items:
                     type: string
                     format: uri
+                  example: [
+                      "https://www.learnandmaster.com/resources/Learn-and-Master-Guitar-Lesson-Book.pdf",
+                      "https://www.thisisclassicalguitar.com/wp-content/uploads/2021/03/Classical-Guitar-Method-Vol1-2020.pdf"
+                    ]
               required:
                 - urls
       responses:
@@ -50,6 +54,7 @@ paths:
                 properties:
                   message:
                     type: string
+                    example: "2 PDF parsing jobs queued"
         '400':
           description: Bad Request
           content:
@@ -57,9 +62,22 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  error_key:
+                    type: array
+                    items:
+                      type: string
+                      example: "Validation error"
+        '500':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
                     type: string
-      security: []
+                    example: "Something went wrong"
+      security: [ ]
   /chat/:
     post:
       tags:
@@ -106,7 +124,7 @@ paths:
                 properties:
                   error:
                     type: string
-      security: []
+      security: [ ]
   /prompts/:
     get:
       tags:
@@ -121,16 +139,6 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    prompt:
-                      type: string
-                    created_at:
-                      type: string
-                      format: date-time
-                    updated_at:
-                      type: string
-                      format: date-time
-      security: []
+                  type: string
+                example: ["Hi, How are you","Heloo, what is your name"]
+      security: [ ]
