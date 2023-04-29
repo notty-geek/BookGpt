@@ -48,7 +48,7 @@ PINECONE_API_KEY=
 
 <br>
 
-###Should look something like this
+### Should look something like this
 <br>
 
 <img width="1635" alt="Screenshot 2023-04-29 at 1 54 31 PM" src="https://user-images.githubusercontent.com/14343387/235317095-80d318d0-2e77-41d0-8280-5e0dee29e6ae.png">
