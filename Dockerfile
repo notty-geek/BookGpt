@@ -1,6 +1,9 @@
 FROM python:3.10
 
 
+RUN apt-get update
+RUN apt-get install poppler-utils -y
+
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
 WORKDIR /code
