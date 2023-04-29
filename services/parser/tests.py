@@ -32,7 +32,7 @@ class ParsePDFViewTestCase(TestCase):
     def test_invalid_parse_pdf_view(self):
         # Construct a mock request object with invalid data.
         data = {'invalid_field': 'http://example.com/pdf'}
-        response = self.client.post('/v1/parse-pdf/', data)
+        response = self.client.post('/v1/parser/pdf/', data)
 
         # Assert that the response status code is 400.
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -40,7 +40,7 @@ class ParsePDFViewTestCase(TestCase):
     def test_empty_pdf_urls(self):
         # Construct a mock request object with an empty list of PDF URLs.
         data = {'urls': []}
-        response = self.client.post('/v1/parse-pdf/', data)
+        response = self.client.post('/v1/parser/pdf/', data)
 
         # Assert that the response status code is 400.
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -53,7 +53,7 @@ class ParsePDFViewTestCase(TestCase):
     def test_parse_pdf_task_enqueueing(self, mock_enqueue):
         # Construct a mock request object with data containing PDF URLs.
         data = {'urls': ['http://example.com/pdf']}
-        response = self.client.post('/v1/parse-pdf/', data)
+        response = self.client.post('/v1/parser/pdf/', data)
 
         # Assert that the response status code is 202.
         self.assertEqual(response.status_code, status.HTTP_202_ACCEPTED)
@@ -65,7 +65,7 @@ class ParsePDFViewTestCase(TestCase):
     def test_parse_pdf_view_error(self, mock_enqueue):
         # Construct a mock request object with data containing PDF URLs.
         data = {'urls': ['http://example.com/pdf']}
-        response = self.client.post('/v1/parse-pdf/', data)
+        response = self.client.post('/v1/parser/pdf/', data)
 
         # Assert that the response status code is 500.
         self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
