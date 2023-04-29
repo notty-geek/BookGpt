@@ -170,4 +170,5 @@ BookGpt
 6. Nginx implementation as a docker sidecar
 7. PgBouncer Side car to allow multiple threads of connections for scale
 8. Much more things
-9. Add E2E testcases, I have added basic template what i mean by that 
+9. Don't Upload the PDF files which are already updated by storing that in DB
+10. Add E2E testcases, I have added basic template what i mean by that 
