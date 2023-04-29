@@ -1,10 +1,12 @@
 import json
 import yaml
 from django.shortcuts import render
+import os
+
 
 def generate_yaml_to_ui(request):
-    swagger_yml = '/code/services/swagger/swagger.yaml'
-    swagger_template = '/code/services/templates/swagger_ui_template.html'
+    swagger_yml = os.path.join(os.getcwd(), "services", "swagger", "swagger.yaml")
+    swagger_template = "swagger_ui_template.html"
     with open(swagger_yml, 'r') as stream:
         try:
             spec_dict = yaml.safe_load(stream)
