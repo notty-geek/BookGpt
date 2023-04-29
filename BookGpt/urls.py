@@ -19,12 +19,14 @@ from django.urls import path, include
 
 from services.chatbot.views import ChatHandlerView, ChatPromptView
 from services.pdfparser.views import ParsePDFView
+from services.swagger import spec
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('parser/pdf', ParsePDFView.as_view(), name='parse_pdf'),
-    path('chat/', ChatHandlerView.as_view(), name='get_response'),
-    path('prompts/', ChatPromptView.as_view(), name='chat_prompt_list'),
     path('django-rq/', include('django_rq.urls')),
+    path('v1/parser/pdf', ParsePDFView.as_view(), name='parse_pdf'),
+    path('v1/chat/', ChatHandlerView.as_view(), name='get_response'),
+    path('v1/prompts/', ChatPromptView.as_view(), name='chat_prompt_list'),
+    path('v1/swagger-ui', spec.generate_yaml_to_ui, name='swagger_ui'),
 
 ]
