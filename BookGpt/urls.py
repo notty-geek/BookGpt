@@ -15,8 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+from services.pdfparser.views import ParsePDFView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('parser/pdf', ParsePDFView.as_view(), name='parse_pdf'),
+    path('django-rq/', include('django_rq.urls')),
+
 ]
