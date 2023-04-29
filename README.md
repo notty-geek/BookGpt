@@ -44,7 +44,7 @@ PINECONE_API_KEY=
 
 #### Your local server should spin up and Swagger Url should be up and running
 
-```http://localhost:8000/v1/swagger-ui```
+- http://localhost:8000/v1/swagger-ui
 
 <br>
 
@@ -54,7 +54,7 @@ PINECONE_API_KEY=
 <img width="1635" alt="Screenshot 2023-04-29 at 1 54 31 PM" src="https://user-images.githubusercontent.com/14343387/235317095-80d318d0-2e77-41d0-8280-5e0dee29e6ae.png">
 
 
-####Now, You can try all the APIS from above documentations
+#### Now, You can try all the APIS from above documentations
 
 
 ## Steps to Build
