@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Design Stripe Parser API Project
+  title: Design Stripe Book Gpt Parser API Project
   description: API documentation for Parser Project
   version: 1.0.0
 servers:
