@@ -1,0 +1,136 @@
+openapi: 3.0.0
+info:
+  title: Design Stripe Parser API Project
+  description: API documentation for Parser Project
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000/v1/
+
+tags:
+  - name: Parser
+    description: |
+        # Parsing Related Json API's
+
+  - name: Chat
+    description: |
+        # Parsing Related Json API's
+  - name: Prompt
+    description: |
+      # Prompt Related Json API's
+
+paths:
+  /parser/pdf:
+    post:
+      tags:
+        - Parser
+      summary: Parse PDF
+      operationId: parsePdf
+      requestBody:
+        description: List of PDF URLs to parse and save to Langchain
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                urls:
+                  type: array
+                  items:
+                    type: string
+                    format: uri
+              required:
+                - urls
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+      security: []
+  /chat/:
+    post:
+      tags:
+        - Chat
+      summary: Get chat response on given prompt
+      operationId: getChatResponse
+      requestBody:
+        description: Chat prompt
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+              required:
+                - prompt
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+      security: []
+  /prompts/:
+    get:
+      tags:
+        - Prompt
+      summary: Get list of all chat prompts
+      operationId: getChatPrompts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    prompt:
+                      type: string
+                    created_at:
+                      type: string
+                      format: date-time
+                    updated_at:
+                      type: string
+                      format: date-time
+      security: []
