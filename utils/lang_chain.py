@@ -1,4 +1,5 @@
 import os
+import traceback
 from langchain.document_loaders import UnstructuredPDFLoader, OnlinePDFLoader
 from langchain.vectorstores import Pinecone
 from langchain.embeddings.openai import OpenAIEmbeddings
@@ -6,12 +7,13 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.llms import OpenAI
 from langchain.chains.question_answering import load_qa_chain
 import pinecone
+import logging
 
 
 class LangChainConnector:
 
     def __init__(self, chunk_size=1000, chunk_overlap=0):
-        self.openai_api_key = os.getenv("OPENAI_API_KEY", )
+        self.openai_api_key = os.getenv("OPENAI_API_KEY")
         self.pinecone_api_key = os.getenv("PINECONE_API_KEY")
         self.pinecone_index = os.getenv("PINECONE_INDEX")
         self.chunk_size = chunk_size
@@ -24,12 +26,16 @@ class LangChainConnector:
 
     def ingest_pdf(self, pdfs):
         for pdf in pdfs:
-            loader = OnlinePDFLoader(pdf)
-            documents = loader.load()
-            embeddings = OpenAIEmbeddings(openai_api_key=self.openai_api_key)
-            text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
-            docs = text_splitter.split_documents(documents)
-            Pinecone.from_documents(docs, embeddings, index_name=self.pinecone_index)
+            try:
+                loader = OnlinePDFLoader(pdf)
+                documents = loader.load()
+                embeddings = OpenAIEmbeddings(openai_api_key=self.openai_api_key)
+                text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+                docs = text_splitter.split_documents(documents)
+                Pinecone.from_documents(docs, embeddings, index_name=self.pinecone_index)
+            except Exception as e:
+                logging.error(traceback.format_exc())
+                logging.error(str(e))
 
     def query(self, query):
         embeddings = OpenAIEmbeddings(openai_api_key=self.openai_api_key)
