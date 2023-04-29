@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-
 import os
 
 from pathlib import Path
@@ -80,7 +79,6 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-
 
 DATABASES = {
 
@@ -152,4 +150,10 @@ RQ_QUEUES = {
         'PORT': os.getenv("REDIS_PORT"),
         'DB': 0,
     }
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+    ]
 }
