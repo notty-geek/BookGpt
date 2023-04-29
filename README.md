@@ -73,12 +73,14 @@ PINECONE_API_KEY=
 
 ## Django admin dashboard
 
+- http://localhost:8000/admin
+
 ![](../../../../var/folders/x1/ztyf7cr13tscl59t7gkzgmjr0000gn/T/TemporaryItems/NSIRD_screencaptureui_ffAFfD/Screenshot 2023-04-29 at 3.39.41 AM.png)
 
 
 
 ## Django task queue dashboard 
-
+- http://localhost:8000/django-rq
 
 ![](../../../../var/folders/x1/ztyf7cr13tscl59t7gkzgmjr0000gn/T/TemporaryItems/NSIRD_screencaptureui_9NF9Rn/Screenshot 2023-04-29 at 3.39.01 AM.png)
 
