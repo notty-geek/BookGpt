@@ -6,10 +6,8 @@ services:
     image: postgres
     volumes:
       - postgres_data_new:/var/lib/postgresql/data/
-    environment:
-      POSTGRES_USER: chatgpt_user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: chatgpt_db
+    env_file:
+      - .env
 
   backend:
     container_name: backend
@@ -23,6 +21,7 @@ services:
       - db
     env_file:
       - .env
+
   redis:
     container_name: redis
     image: redis:latest
