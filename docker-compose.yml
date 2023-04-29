@@ -2,17 +2,19 @@ version: '3'
 
 services:
   db:
-    container_name: design_stripe_db
+    container_name: BookGptDb
     image: postgres
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    env_file:
-      - .env
+      - postgres_data_new:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: chatgpt_user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: chatgpt_db
 
   backend:
     container_name: backend
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: make local-api
     volumes:
       - .:/code
     ports:
@@ -28,13 +30,15 @@ services:
       - "6379:6379"
 
   rqworker:
-    container_name: reworker
+    container_name: rqworker
     build: .
     command: python manage.py rqworker
     volumes:
       - .:/code
     depends_on:
       - redis
+    env_file:
+      - .env
 
 volumes:
-  postgres_data:
+  postgres_data_new:
