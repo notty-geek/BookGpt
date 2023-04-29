@@ -51,8 +51,7 @@ PINECONE_API_KEY=
 ###Should look something like this
 <br>
 
-
-![](../../../../var/folders/x1/ztyf7cr13tscl59t7gkzgmjr0000gn/T/TemporaryItems/NSIRD_screencaptureui_oP48nv/Screenshot 2023-04-29 at 11.27.04 AM.png)
+<img width="1635" alt="Screenshot 2023-04-29 at 1 54 31 PM" src="https://user-images.githubusercontent.com/14343387/235317095-80d318d0-2e77-41d0-8280-5e0dee29e6ae.png">
 
 
 ####Now, You can try all the APIS from above documentations
@@ -75,14 +74,16 @@ PINECONE_API_KEY=
 
 - http://localhost:8000/admin
 
-![](../../../../var/folders/x1/ztyf7cr13tscl59t7gkzgmjr0000gn/T/TemporaryItems/NSIRD_screencaptureui_ffAFfD/Screenshot 2023-04-29 at 3.39.41 AM.png)
+
+<img width="1721" alt="Screenshot 2023-04-29 at 1 54 54 PM" src="https://user-images.githubusercontent.com/14343387/235317121-9693b613-6f64-436a-b16e-33cccac1b874.png">
 
 
 
 ## Django task queue dashboard 
 - http://localhost:8000/django-rq
 
-![](../../../../var/folders/x1/ztyf7cr13tscl59t7gkzgmjr0000gn/T/TemporaryItems/NSIRD_screencaptureui_9NF9Rn/Screenshot 2023-04-29 at 3.39.01 AM.png)
+
+<img width="1728" alt="Screenshot 2023-04-29 at 1 55 18 PM" src="https://user-images.githubusercontent.com/14343387/235317139-b79d8319-964a-4491-a455-b3479a91aff1.png">
 
 
 ## Creating a Superuser
