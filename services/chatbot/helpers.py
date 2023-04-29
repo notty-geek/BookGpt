@@ -1,5 +1,5 @@
 from services.chatbot.models import ChatPrompt
-from utils.lang_chain import LangChainParser
+from utils.lang_chain import LangChainConnector
 from django_rq import job
 from django.db import IntegrityError, transaction
 
@@ -7,7 +7,7 @@ from django.db import IntegrityError, transaction
 class ChatHelper:
 
     def get_response(self, prompt: str) -> str:
-        response = LangChainParser().query(query=prompt)
+        response = LangChainConnector().query(query=prompt)
         save_prompt_job.delay(prompt)
         return response
 
