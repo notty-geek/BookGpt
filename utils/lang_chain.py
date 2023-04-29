@@ -24,18 +24,17 @@ class LangChainConnector:
             environment=os.getenv("PINECONE_API_ENV")  # next to api key in console
         )
 
-    def ingest_pdf(self, pdfs):
-        for pdf in pdfs:
-            try:
-                loader = OnlinePDFLoader(pdf)
-                documents = loader.load()
-                embeddings = OpenAIEmbeddings(openai_api_key=self.openai_api_key)
-                text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
-                docs = text_splitter.split_documents(documents)
-                Pinecone.from_documents(docs, embeddings, index_name=self.pinecone_index)
-            except Exception as e:
-                logging.error(traceback.format_exc())
-                logging.error(str(e))
+    def ingest_pdf(self, pdf):
+        try:
+            loader = OnlinePDFLoader(pdf)
+            documents = loader.load()
+            embeddings = OpenAIEmbeddings(openai_api_key=self.openai_api_key)
+            text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+            docs = text_splitter.split_documents(documents)
+            Pinecone.from_documents(docs, embeddings, index_name=self.pinecone_index)
+        except Exception as e:
+            logging.error(traceback.format_exc())
+            raise ValueError('PDF ingestion failed: {}'.format(str(e)))
 
     def query(self, query):
         embeddings = OpenAIEmbeddings(openai_api_key=self.openai_api_key)

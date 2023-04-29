@@ -3,6 +3,6 @@ from utils.lang_chain import LangChainConnector
 
 
 @job
-def parse_pdf_task(pdf_urls):
+def parse_pdf_task(pdf_url):
     parser = LangChainConnector()
-    parser.ingest_pdf(pdf_urls)
+    parser.ingest_pdf(pdf_url)
